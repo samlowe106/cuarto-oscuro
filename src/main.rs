@@ -6,6 +6,7 @@ use clap::Parser;
 
 #[derive(clap::Parser)]
 struct Args {
+    /// Input folder path
     path: PathBuf,
     /// Input image formats
     #[arg(short, long, default_values = ["jpg", "jpeg", "png", "bmp", "tiff"])]
