@@ -1,4 +1,3 @@
-use anyhow::Error;
 use std::path::PathBuf;
 
 use walkdir::WalkDir;
@@ -8,13 +7,15 @@ use clap::Parser;
 #[derive(clap::Parser)]
 struct Args {
     path: PathBuf,
+    /// Input image formats
     #[arg(short, long, default_values = ["jpg", "jpeg", "png", "bmp", "tiff"])]
     input_formats: Vec<String>,
+    /// Target format
     #[arg(short, long, default_value = "webp")]
     out_format: String,
 }
 
-fn main() -> Result<(), Error> {
+fn main() -> anyhow::Result<()> {
     let args = Args::parse();
 
     let inpaths_outpaths: Vec<(PathBuf, PathBuf)> = WalkDir::new(args.path)
